@@ -32,9 +32,9 @@
 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-           Settings
+            Settings
           </a>
-
+          
           <ul class="dropdown-menu">
             <?php
               session_start();
@@ -58,10 +58,17 @@
         </li>
        
       </ul>
-      <li class="nav-item">
-          <a class="nav-link" href="mycart.php">Cart</a>
-        </li>
-      
+      <a class="nav-item">
+                            <?php if (isset($_SESSION['email'])) {
+                                echo
+                                '<a class="nav-link px-4">
+                                <b class="hov"><i class="bi bi-person"></i>' . " " . $_SESSION['email'];
+                                '</b></a>';} 
+                            ?>
+</a>
+<?php if (isset($_SESSION['email'])) {
+echo '<a class="nav-link" href="mycart.php">Cart</a>
+                          </a>';}?>
       <!-- <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
