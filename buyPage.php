@@ -28,7 +28,7 @@ $pdetails = mysqli_query($conn, "SELECT * FROM products where pid = '$pid'");
 ?>
 
     <?php while ($product = mysqli_fetch_assoc($pdetails)) { ?>
-
+<form class="" method="POST" action="addtocart.php">
            <div class='card' style='width: 18rem;'>
             <img  class='cardImg' alt='...' src='img/<?php echo $product['product_image'];?>'>
              <div class='card-body'>
@@ -41,10 +41,13 @@ $pdetails = mysqli_query($conn, "SELECT * FROM products where pid = '$pid'");
                 <h5 class='card-title'><?php echo $product['product_name'] ?>;</h5>
                     <p class='card-text'><?php echo $product['product_description'] ?>;
                     </p>
-                    <a href='#'' class='btn btn-primary'>Add To Cart</a>
+                    <button type="submit" name="Add_To_cart" class="btn btn-outline-dark">
+                        Add to cart </button>
                 </div>
-               
-    </div>
+                <input type="hidden" name="Item_name" value="<?php echo $product['product_name']; ?>">
+				<input type="hidden" name="price" value="<?php echo $product['product_price']; ?>">               
+        </div>
+    </form>
 </div>
 <?php }?>    
 

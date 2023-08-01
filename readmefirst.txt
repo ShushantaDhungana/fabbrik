@@ -14,3 +14,8 @@ headers = SN, name, message, date;
 //table for order
 table name = orderdetails;
 headers = SN, flavour, quantity, pounds, orderdate, ordertime, address, date;
+
+
+
+
+item_name, price, quantity, order_id, orderedby, address, phoneno, payment_mode

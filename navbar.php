@@ -56,8 +56,11 @@
           </ul>';}
           ?>
         </li>
+       
       </ul>
-
+      <li class="nav-item">
+          <a class="nav-link" href="mycart.php">Cart</a>
+        </li>
       
       <!-- <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
