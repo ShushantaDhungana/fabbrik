@@ -138,7 +138,7 @@ include("./dbconnect.php");
         subTotal();
     </script>
     <?php
-    require './includes/footer.php';
+    require './footer.php';
     ?>
 
 </body>

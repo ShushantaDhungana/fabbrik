@@ -9,7 +9,7 @@ include '../dbconnect.php';
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Strumo | Manage Order</title>
+    <title>FABBRIK | Manage Order</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
@@ -48,7 +48,7 @@ include '../dbconnect.php';
 
 
                 <?php
-                $q = mysqli_query($mysqli, "SELECT * FROM orders");
+                $q = mysqli_query($conn, "SELECT * FROM orders");
                 $rr = mysqli_num_rows($q);
                 if (!$rr) {
                     echo "<h2 style='color:red'>No any user exists !!!</h2>";
@@ -93,7 +93,7 @@ include '../dbconnect.php';
                             echo "<td>" . $row['order_id'] . "</td>";
                             echo "<td>" . $row['orderedby'] . "</td>";
                             echo "<td>" . $row['address'] . "</td>";
-                            echo "<td>" . $row['phoneno'] . "</td>";
+                            echo "<td>" . $row['phone_no'] . "</td>";
                             echo "<td>" . $row['payment_mode'] . "</td>";
                         ?>
 
@@ -110,7 +110,7 @@ include '../dbconnect.php';
         </section>
     </div>
     <?php
-    require '../includes/footer.php'; ?>
+    require '../footer.php'; ?>
 </body>
 
 </html>

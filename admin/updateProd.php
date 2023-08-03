@@ -106,7 +106,7 @@ include '../includes/aside.php'; ?>
 
 	</div>
 	<?php
-	require '../includes/footer.php'; ?>
+	require '../footer.php'; ?>
 </body>
 
 

@@ -110,7 +110,7 @@ include '../dbconnect.php';
         }
     </script>
     <?php
-    require '../includes/footer.php'; ?>
+    require '../footer.php'; ?>
 </body>
 
 
