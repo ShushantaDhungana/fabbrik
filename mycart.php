@@ -24,7 +24,7 @@ include("./dbconnect.php");
 
     <div class="container" style="font-family:'Loco',serif;">
         <div class="row">
-            <div class="col-lg-12 text-center text-white border rounded navigation my-5">
+            <div class="col-lg-12 text-center text-dark border rounded my-5">
                 <h1>MY CART</h1>
             </div>
 

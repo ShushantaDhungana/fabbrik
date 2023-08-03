@@ -1,22 +1,35 @@
 <?php
 include '../dbconnect.php';
 session_start();
+$pid = $_GET['pid'];	
 
-extract($_POST);
-if (isset($update)) {
-	mysqli_query($conn, "UPDATE products SET product_name='$product_name',product_price='$product_price',product_stock='$product_stock', product_description='$product_description' where pid='" . $_GET['pid'] . "'");
-	$err = "<font color='blue'>Product updated </font>";
-	echo '<script>
-	alert("Product Updated");
-	window.location.href="manageProd.php";
-	</script>';
+if (isset($_POST['update'])) {
+    // Sanitize and escape the input values
+    $product_name = mysqli_real_escape_string($conn, $_POST['product_name']);
+    $product_price = (int)$_POST['product_price'];
+    $product_stock = (int)$_POST['product_stock'];
+    $product_description = mysqli_real_escape_string($conn, $_POST['product_description']);
+
+    // Use prepared statement to avoid SQL injection
+    $stmt = $conn->prepare("UPDATE products SET product_name=?, product_price=?, product_stock=?, product_description=? WHERE pid=?");
+    $stmt->bind_param("siisi", $product_name, $product_price, $product_stock, $product_description, $pid);
+
+    if ($stmt->execute()) {
+        $err = "<font color='blue'>Product updated </font>";
+        echo '<script>
+        alert("Product Updated");
+        window.location.href="manageProd.php";
+        </script>';
+    } else {
+        echo "Error updating product: " . $stmt->error;
+    }
 }
 
-//select old product
-
-$q = mysqli_query($conn, "SELECT * FROM products WHERE pid='" . $_GET['pid'] . "'");
+// Select old product
+$q = mysqli_query($conn, "SELECT * FROM products WHERE pid='$pid'");
 $res = mysqli_fetch_array($q);
 ?>
+
 <?php
 include '../includes/aside.php'; ?>
 
@@ -26,7 +39,7 @@ include '../includes/aside.php'; ?>
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<title>Strumo | Update Product</title>
+	<title>FABBRIK | Update Product</title>
 	<link rel="stylesheet" href="../assets/css/style.css" />
 	<link rel="stylesheet" href="../assets/css/bootstrap.css" />
 	<link rel="stylesheet" href="../assets/css/bootstrap.min.css" />

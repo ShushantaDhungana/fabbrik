@@ -38,9 +38,6 @@ $pdetails = mysqli_query($conn, "SELECT * FROM products where pid = '$pid'");
         </div>
         <div class='description'>
             <div> 
-                <h5 class='card-title'><?php echo $product['product_name'] ?>;</h5>
-                    <p class='card-text'><?php echo $product['product_description'] ?>;
-                    </p>
                     <button type="submit" name="Add_To_cart" class="btn btn-outline-dark">
                         Add to cart </button>
                 </div>

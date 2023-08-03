@@ -69,31 +69,29 @@ include '../dbconnect.php';
                     <table class="table table-hover table-bordered">
                         <Tr class="success">
                             <th>S.No</th>
-                            <th>User Name</th>
+                            <th>Full Name</th>
                             <th>Email</th>
+                            <th>Username</th>
                             <th>Address</th>
                             <th>Contact</th>
                             <th>Password</th>
-                            <th>Update</th>
                             <th>Delete</th>
                         </tr>
                         <?php
-
-
                         $i = 1;
                         while ($row = mysqli_fetch_assoc($q)) {
 
                             echo "<tr>";
                             echo "<td>" . $i . "</td>";
-                            echo "<td>" . $row['fname'] . "</td>";
-                            echo "<td>" . $row['lname'] . "</td>";
+                            echo "<td>" . $row['fname'] . ' ' . $row['lname'] . "</td>";
                             echo "<td>" . $row['email'] . "</td>";
+                            echo "<td>" . $row['username'] . "</td>";
+                            echo "<td>" . $row['address'] . "</td>";
                             echo "<td>" . $row['phone'] . "</td>";
                             echo "<td>" . $row['password'] . "</td>";
                         ?>
 
                             <td><a href="javascript:DeleteUser('<?php echo $row['uid']; ?>')" class="btn btn-danger">Delete</a></td>
-                            <td><a href="javascript:UpdateUser('<?php echo $row['uid']; ?>')" class="btn btn-danger">Update</a></td>
                         <?php
                             echo "</tr>";
                             $i++;

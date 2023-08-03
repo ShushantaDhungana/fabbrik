@@ -27,7 +27,11 @@
             <div class='card-body'>
                 <h5 class='card-title'><?php echo $prod['product_name']?></h5>
                     <p class='card-text'>Rs. <?php echo $prod['product_price']?></p>
-                        <a href='buyPage.php?pid=<?php echo$prod["pid"];?>' class='btn btn-primary'>Buy</a>
+                    <?php if(isset($_SESSION['email'])){?>    
+                    <a href='buyPage.php?pid=<?php echo$prod["pid"];?>' class='btn btn-primary'>Buy</a>
+                    <?php }else{ ?>
+                    <a href='login.php' class='btn btn-primary'>Buy</a>
+                    <?php } ?>
             </div>
         </div>
           <?php }?>
