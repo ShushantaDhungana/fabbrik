@@ -6,7 +6,7 @@ extract($_POST);
 if (isset($login)) {
     $user = $_POST["user"];
     $pass = $_POST["pass"];
-    $que = mysqli_query($conn, "SELECT * FROM admin WHERE username='$user' AND password='$pass'");
+    $que = mysqli_query($conn, "SELECT * FROM admin WHERE username ='$user' AND password ='$pass'");
     $row = mysqli_num_rows($que);
     if ($row) {
         $_SESSION['admin'] = $user;
@@ -17,91 +17,78 @@ if (isset($login)) {
 }
 ?>
 
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <title>FABBRIK | Admin Login</title>
-    <!-- <script src="./js/validate.js"></script> -->
-    <!-- Website Logo -->
-    <link rel="icon" type="image/x-icon" href="images/webw.png" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/bootstrap.css" />
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
-    <link rel="icon" type="image/x-icon" href="images/logos/webw.png" />
-    <link rel="stylesheet" href="css/style.css" />
-    <script type="text/javascript" src="js/login.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FABBRIK | Log In</title>
+</head>
 
-<body class="bg-dark font">
 
-    <section class="mt-5">
-        <div class="container">
-            <div class="d-flex justify-content-center align-items-center">
-                <div class="col-5 d-flex justify-content-center m-auto">
-                    <div class="d-flex justify-content-center mb-1 mt-5 wid text-white" style="border-radius: 25px;">
-                        <h3><a href="#" class="nav-link text-white">
-                                <span class="hov">Admin Login</span>
-                            </a></h3>
+<body>
+    <!-- <?php
+        if ($login) {
+            echo "Logged in Successfully";
+        }
+     ?> -->
+    <div class="container" style="flex-direction: column">
+        <h3><a href="#" class="nav-link text-white">
+                <span class="hov" style="color: black;">Admin Login</span>
+            </a></h3>
+        <img src="../img/FABBRIK.png" style="width: 500px;">
+        <!-- <h1 class="text-center" style="    top: 1rem; position:relative;">Welcome to</h1> -->
+        <form action="index.php" method="POST">
+            <form method="POST" class="mt-2">
+                <fieldset>
+                    <div class="form-group">
+                        <label for="username" class="mb-1"><b>Username</label>
+                        <span class="text-danger">*</span></b> <input class="form-control mb-2 border-secondary" name="user"
+                            type="text" required placeholder="Username">
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="">
-        <div class="container">
-            <div class="d-flex justify-content-center align-items-center">
-                <div class="col-5 d-flex justify-content-center m-auto">
-                    <div class="card mb-5 p-4 py-0 text-black w-75 border" style="border-radius: 25px;">
-                        <div class="border-2 card-body px-0 py-0 rounded-2">
-                            <img src="../img/FABBRIK.png" width="40%" alt="Strumo" class="center mt-3 ">
-                            <h4 class="text-dark d-flex justify-content-center mt-2 mb-2 font">Admin</h4>
-                            <form method="POST" class="mt-2">
-                                <fieldset>
-                                    <div class="form-group">
-                                        <label for="username" class="mb-1"><b>Username</label>
-                                        <span class="text-danger">*</span></b> <input class="form-control mb-2 border-secondary" name="user" type="text" required placeholder="Username">
-                                    </div>
-                                    <!-- <div class="form-group mb-2">
-                                        <label for="password" class="mb-1"><b>Password</label>
-                                        <span class="text-danger">*</span></b>
-                                        <input class="form-control mb-4 border-secondary" placeholder="Password" name="pass" type="password" required>
-                                    </div> -->
-                                    <div class="form-group">
-                                        <label for="password" class="mt-3">
-                                            <b>Password: <span class="text-danger">*</span></b>
-                                        </label>
-                                        <div class="input-group mb-3">
-                                            <input type="password" class="form-control border-secondary mb-4" name="pass" id="password" placeholder="Password" onfocus="toggleVisibility()" aria-label=" Recipient's username" aria-describedby="button-addon2">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-outline-secondary" onclick="togglePassword()" type=" button" id="button-addon2">Show</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group d-flex form-group justify-content-center mb-1">
-                                        <input name="login" type="submit" value="Login" class="d-flex justify-content-between btn btn-dark text-white btn-block">
-                                    </div>
-                                    <?php echo @$err; ?>
-                                </fieldset>
-                            </form>
+            
+                    <div class="form-group">
+                        <label for="password" class="mt-3">
+                            <b>Password: <span class="text-danger">*</span></b>
+                        </label>
+                        <div class="input-group mb-3">
+                            <input type="password" class="form-control border-secondary mb-4" name="pass" id="password"
+                                placeholder="Password" onfocus="toggleVisibility()" aria-label=" Recipient's username"
+                                aria-describedby="button-addon2">
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
+                    <div class="form-group d-flex form-group justify-content-center mb-1">
+                        <input name="login" type="submit" value="Login"
+                            class="d-flex justify-content-between btn btn-dark text-white btn-block">
+                    </div>
+                    <?php echo @$err; ?>
+                </fieldset>
+            </form>
 
-        <!-- jQuery -->
-        <!-- <script src="../css/css/jquery.min.js"></script> -->
+        </form>
 
-        <!-- Bootstrap Core JavaScript -->
-        <!-- <script src="../css/css/bootstrap.min.js"></script> -->
+    </div>
 
-        <!-- Metis Menu Plugin JavaScript -->
-        <!-- <script src="../css/css/metisMenu.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 
-        <!-- Custom Theme JavaScript -->
-        <!-- <script src="../css/css/sb-admin-2.js"></script> -->
 
+
+    <div style="position: relative; top: 6rem;">
+        <?php include "../footer.php"?>
+    </div>
 </body>
 
 </html>
