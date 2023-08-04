@@ -111,7 +111,7 @@ include '../dbconnect.php';
           <!-- ./col -->
           <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-danger zoom">
+            <!-- <div class="small-box bg-danger zoom">
               <div class="inner">
                 <h4 class="mb-2">Total Categories</h4>
                 <h4 class="mb-0">
@@ -130,7 +130,7 @@ include '../dbconnect.php';
                 <i class="fas fa-arrow-circle-right"></i>
               </div>
               <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
