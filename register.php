@@ -2,12 +2,13 @@
     include "dbconnect.php";
     ?>
     <?php
-    $fname_err = $lname_err = $username_err = $email_err = $email_err1 = $phone_err = $phone_err1 = $pass_err = $pass_err1 =$success = null;
+    $fname_err = $lname_err = $username_err = $email_err = $address_err = $email_err1 = $phone_err = $phone_err1 = $pass_err = $pass_err1 =$success = null;
     if(isset($_POST['submit'])){
         $fname = $_POST['fname'];
         $lname = $_POST['lname'];
         $email = $_POST['email'];
         $phone = $_POST['phone'];
+        $address = $_POST['address'];
         $pass = $_POST['pass'];
         $cpass = $_POST['cpass'];
         $username = $_POST['username'];
@@ -36,6 +37,9 @@
         else if(empty($username)){
             $username_err = "Username field is empty";
         }
+        else if(empty($address)){
+            $address_err = "Address field is empty";
+        }
         else if(!preg_match('/^[0-9]{10}+$/', $phone)){
             $phone_err1 = "Invalid phone number";
         }
@@ -46,7 +50,7 @@
             $pass_err1 = "Passwords do not match"; 
         }
         else{
-            $sql = "INSERT INTO `register` (`username`,`fname`, `lname`, `email`, `phone`, `password`) VALUES ('$username','$fname', '$lname', '$email', '$phone', '$pass')";
+            $sql = "INSERT INTO `register` (`username`,`fname`, `lname`, `email`,`address`, `phone`, `password`) VALUES ('$username','$fname', '$lname', '$email','$address', '$phone', '$pass')";
             $result = mysqli_query($conn, $sql);
             if($result){
                 $success = "Signed Up successfully";
@@ -101,6 +105,11 @@
     <?php 
     if($username_err!=null){
         ?><style>.username-err{display: block;}</style><?php
+    }
+    ?>
+    <?php 
+    if($address_err!=null){
+        ?><style>.address-err{display: block;}</style><?php
     }
     ?>
     <?php 
@@ -167,6 +176,12 @@
                         placeholder="Enter email" value="<?php if(isset($_POST['email'])) echo $_POST['email'];?>">
                         <p class="error email-err"><?php echo $email_err ?></p>
                         <p class="error email-err"><?php echo $email_err1 ?></p>
+
+                    <label for="address">Address</label>
+                            <input type="text" name="address" class="form-control" id="address"
+                        placeholder="Enter address" value="<?php if(isset($_POST['email'])) echo $_POST['email'];?>">
+                        <p class="error address-err"><?php echo $address_err ?></p>
+                        <p class="error address-err"><?php echo $address_err1 ?></p>
                         
 
                 <label for="lastName">Phone Number</label>
