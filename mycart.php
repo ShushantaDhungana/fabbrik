@@ -41,33 +41,36 @@ include("./dbconnect.php");
                         </tr>
                     </thead>
                     <tbody class="text-center">
-                        <?php
-                        $total = 0;
-                        if (isset($_SESSION['cart'])) {
-                            foreach ($_SESSION['cart'] as $key => $value) {
-                                $sr = $key + 1;
-                                echo "<tr>
-                                <td>$sr</td>
-                                <td>$value[Item_name]</td>
-                                <td>$value[price]<input type='hidden' class='iprice' value='$value[price]'></td>
-                                <td>
-                                <form action='./addtocart.php' method='POST'>
-                                $value[Quantity]<input class='text-center iquantity' name='Mod_Quantity' id='Mod_Quantity' onchange='this.form.submit();' type='hidden' value='$value[Quantity]' min='1' max=''>                                </td>
-                                <input type='hidden' name='Item_name' value='$value[Item_name]'>
-                                </form>
-                                </td>
-                                <td class='itotal'></td>
-                                <td>
-                                <form action='./addtocart.php' method='POST'>
-                                <button name='Remove_Item' class='btn btn-sm btn-danger'>REMOVE</button>
-                                <input type='hidden' name='Item_name' value='$value[Item_name]'>
-                                </form>
-                                </td>
-                                </tr>";
-                            }
-                        }
-                        ?>
-                    </tbody>
+        <?php
+        $total = 0;
+        if (isset($_SESSION['cart']) && is_array($_SESSION['cart'])) { // Check if $_SESSION['cart'] is set and is an array
+            foreach ($_SESSION['cart'] as $key => $value) {
+                $sr = $key + 1;
+                if (isset($value['Item_name'], $value['price'], $value['Quantity'])) { // Check if required keys exist in $value
+                    echo "<tr>
+    <td>$sr</td>
+    <td>{$value['Item_name']}</td>
+    <td>{$value['price']}<input type='hidden' class='iprice' value='{$value['price']}'></td>
+    <td>
+        <form action='./addtocart.php' method='POST'>
+            {$value['Quantity']}<input class='text-center iquantity' name='Mod_Quantity' id='Mod_Quantity' onchange='this.form.submit();' type='hidden' value='{$value['Quantity']}' min='1' max=''>
+            <input type='hidden' name='Item_name' value='{$value['Item_name']}'>
+        </form>
+    </td>
+    <td class='itotal'></td>
+    <td>
+        <form action='./addtocart.php' method='POST'>
+            <button name='Remove_Item' class='btn btn-sm btn-danger'>REMOVE</button>
+            <input type='hidden' name='Item_name' value='{$value['Item_name']}'>
+        </form>
+    </td>
+</tr>";
+
+                }
+            }
+        }
+        ?>
+    </tbody>
                 </table>
             </div>
 

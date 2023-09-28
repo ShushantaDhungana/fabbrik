@@ -35,7 +35,7 @@
             Settings
           </a>
           
-          <ul class="dropdown-menu">
+        <ul class="dropdown-menu">
             <?php
               session_start();
               if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] = TRUE) {
@@ -53,26 +53,33 @@
             if($loggedin){
             echo'<li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="logout/logout.php">logout</a></li>
-          </ul>';}
+        ';}
           ?>
+        </ul>
         </li>
-       
+
+        <li>
+          <div class="search" style="position: absolute;left: 679px; top: 17px;">
+            <form class="d-flex" role="search" action="search.php" method="POST">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+          </div>
+        </li>
       </ul>
-      <a class="nav-item">
-                            <?php if (isset($_SESSION['email'])) {
-                                echo
-                                '<a class="nav-link px-4">
-                                <b class="hov"><i class="bi bi-person"></i>' . " " . $_SESSION['email'];
-                                '</b></a>';} 
-                            ?>
+
+<a class="nav-item">
+      <?php if (isset($_SESSION['email'])) {
+      echo
+      '<a class="nav-link px-4">
+      <b class="hov"><i class="bi bi-person"></i>' . " " . $_SESSION['email'];
+      '</b></a>';} 
+      ?>
 </a>
+
+
 <?php if (isset($_SESSION['email'])) {
-echo '<a class="nav-link" href="mycart.php">Cart</a>
-                          </a>';}?>
-      <!-- <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form> -->
+echo '<a class="nav-link" href="mycart.php">Cart</a>';}?>
     </div>
   </div>
 </nav>

@@ -15,7 +15,7 @@
     width: 120px;
     margin-left: 1rem;
     margin-right: 2rem;
-}s
+}
 
 .form-section{
     flex-direction: column;
@@ -175,4 +175,8 @@ display: flex;
 .table-striped>tbody>tr:nth-of-type(odd)>* {
     --bs-table-accent-bg: var(--bs-table-striped-bg);
     color: var(--bs-table-striped-color);
+}
+.navbar-nav .nav-item:nth-child(5) .nav-link {
+    list-style: none; /* Remove list-style (usually the marker) */
+    padding-left: 0;
 }

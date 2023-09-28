@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     // Code to Upload Files
 
-    $query = mysqli_query($conn, "INSERT INTO products (product_name,product_image,product_description,product_price,product_stock) values ('$product_name','$product_image','$product_description','$product_price','$product_stock')");
+    $query = mysqli_query($conn, "INSERT INTO products (`product_name`, `product_image`, `product_description`, `product_price`, `product_stock`) values ('$product_name', '$product_image', '$product_description', '$product_price', '$product_stock' )");
   } catch (Exception $e) {
     $message = 'Unable to add new product.' . $e;
     throw new Exception('Unable to save details. Please try again later.', 0, $e);

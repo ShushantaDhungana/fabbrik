@@ -33,6 +33,7 @@ $pdetails = mysqli_query($conn, "SELECT * FROM products where pid = '$pid'");
             <img  class='cardImg' alt='...' src='img/<?php echo $product['product_image'];?>'>
              <div class='card-body'>
                 <h5 class='card-title'><?php echo $product['product_name'];?></h5>
+                <p class='card-text'><?php echo $product['product_description'];?></p>
                     <p class='card-text'>Rs. <?php echo $product['product_price'];?></p>
             </div>
         </div>
