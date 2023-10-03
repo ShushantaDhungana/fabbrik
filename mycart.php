@@ -41,80 +41,89 @@ include("./dbconnect.php");
                         </tr>
                     </thead>
                     <tbody class="text-center">
-        <?php
-        $total = 0;
-        if (isset($_SESSION['cart']) && is_array($_SESSION['cart'])) { // Check if $_SESSION['cart'] is set and is an array
-            foreach ($_SESSION['cart'] as $key => $value) {
-                $sr = $key + 1;
-                if (isset($value['Item_name'], $value['price'], $value['Quantity'])) { // Check if required keys exist in $value
-                    echo "<tr>
-    <td>$sr</td>
-    <td>{$value['Item_name']}</td>
-    <td>{$value['price']}<input type='hidden' class='iprice' value='{$value['price']}'></td>
-    <td>
-        <form action='./addtocart.php' method='POST'>
-            {$value['Quantity']}<input class='text-center iquantity' name='Mod_Quantity' id='Mod_Quantity' onchange='this.form.submit();' type='hidden' value='{$value['Quantity']}' min='1' max=''>
-            <input type='hidden' name='Item_name' value='{$value['Item_name']}'>
-        </form>
-    </td>
-    <td class='itotal'></td>
-    <td>
-        <form action='./addtocart.php' method='POST'>
-            <button name='Remove_Item' class='btn btn-sm btn-danger'>REMOVE</button>
-            <input type='hidden' name='Item_name' value='{$value['Item_name']}'>
-        </form>
-    </td>
-</tr>";
+                        <?php
+                        $total = 0;
+                        if (isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
+                            foreach ($_SESSION['cart'] as $key => $value) {
+                                $sr = $key + 1;
+                                if (isset($value['Item_name'], $value['price'], $value['Quantity'])) { // Check if required keys exist in $value
+                                    echo "
+                    <tr>
+                        <td>$sr</td>
+                        <td>$value[Item_name]</td>
+                        <td>$value[price]<input type='hidden' class='iprice' value='$value[price]'></td>
+                        <td>
+                            <form action='./addtocart.php' method='POST'>
+                                $value[Quantity]<input class='text-center iquantity' name='Mod_Quantity' id='Mod_Quantity' onchange='this.form.submit();' type='hidden' value='$value[Quantity]' min='1' max=''>
+                                <input type='hidden' name='Item_name' value='$value[Item_name]'>
+                            </form>
+                        </td>
+                        <td class='itotal'></td>
+                        <td>
+                            <form action='./addtocart.php' method='POST'>
+                                <button name='Remove_Item' class='btn btn-sm btn-danger'>REMOVE</button>
+                                <input type='hidden' name='Item_name' value='$value[Item_name]'>
+                            </form>
+                        </td>
+                    </tr>";
 
-                }
-            }
-        }
-        ?>
-    </tbody>
+                                }
+                            }
+                        }
+                        ?>
+                    </tbody>
                 </table>
             </div>
 
             <?php
             $email = $_SESSION['email'];
-            $userDetail = mysqli_query($conn, "SELECT * FROM register  WHERE email = '$email'");
+            $userDetail = mysqli_query($conn, "SELECT * FROM register WHERE email = '$email'");
 
             while ($userinfo = mysqli_fetch_array($userDetail)) { ?>
                 <div class="col-lg-3 font">
-                    <div class="border border-success mb-5 border-2 bg-light rounded p-4">
+                    <div class="border border-secondary mb-5 border-2 bg-light rounded p-4">
                         <h4>Grand Total:</h4>
                         <h5 class="text-right" id="gtotal"></h5>
                         <?php
                         if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
-                        ?>
+                            ?>
                             <!--customer details for payment -->
 
                             <form action="./purchase.php" method="POST" class="my-0" enctype="multipart/form-data">
                                 <div class="form-group mt-3 mb-3">
                                     <b><label>Name: </label></b>
-                                    <?php echo $userinfo['fname']; ?><input type="hidden" name="fname" id="fname" value="<?php echo $userinfo['fname']; ?>" placeholder="Full Name" class="form-control border-success" required>
+                                    <?php echo $userinfo['fname']; ?><input type="hidden" name="fname" id="fname"
+                                        value="<?php echo $userinfo['fname'] . " " . $userinfo['lname']; ?>"
+                                        placeholder="Full Name" class="form-control border-secondary" required>
                                 </div>
                                 <div class="form-group mt-3 mb-3">
                                     <b><label>Phone: </label></b>
-                                    <?php echo $userinfo['phone'] ?><input type="hidden" name="phone_no" id="phone_no" value="<?php echo $userinfo['phone'] ?>" placeholder="Phone Number" class="form-control border-success" required>
+                                    <?php echo $userinfo['phone'] ?><input type="hidden" name="phone_no" id="phone_no"
+                                        value="<?php echo $userinfo['phone'] ?>" placeholder="Phone Number"
+                                        class="form-control border-secondary" required>
                                 </div>
                                 <div class="form-group mt-3 mb-3">
                                     <b><label>Address: </label></b>
-                                    <?php echo $userinfo['address'] ?><input type="hidden" name="address" id="address" value="<?php echo $userinfo['address'] ?>" placeholder="Address" class="form-control border-success" required>
+                                    <?php echo $userinfo['address'] ?><input type="hidden" name="address" id="address"
+                                        value="<?php echo $userinfo['address'] ?>" placeholder="Address"
+                                        class="form-control border-secondary" required>
                                 </div>
                                 <div class="form-group mt-3 mb-3">
-                                    <input class="form-check-input border-success" checked type="radio" name="pay_mode" value="COD" id="flexRadioDefault1">
+                                    <input class="form-check-input border-secondary" checked type="radio" name="pay_mode"
+                                        value="COD" id="flexRadioDefault1">
                                     <b><label class="form-check-label" for="flexRadioDefault1">Cash On Delivery
                                         </label></b>
                                 </div>
-                                <button class="btn btn-outline-dark m-auto d-flex justify-content-center" name="purchase">Purchase</button>
+                                <button class="btn btn-outline-dark m-auto d-flex justify-content-center"
+                                    name="purchase">Purchase</button>
                             </form>
 
-                        <?php
+                            <?php
                         } ?>
                     </div>
 
                 </div>
-            <?php
+                <?php
             } ?>
         </div>
     </div>
