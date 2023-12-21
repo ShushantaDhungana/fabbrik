@@ -10,7 +10,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     header("Location:ourProducts.php?pid=" . $productid);
 }
 ?>
-?>
 
 <!DOCTYPE html>
 <html lang="en">
