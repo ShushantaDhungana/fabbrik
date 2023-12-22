@@ -61,6 +61,7 @@
             <input type="password" name = "password" class="form-control" id="password" placeholder="Password" style="width: 30rem;">
         </div>
         <button type="logIn" name = "login" class="btn btn-primary" style="float: right;">LOG IN</button>
+        <p>Don't have an account? <a href="register.php">Create one.</a></p>
     </form>
     
     </div>

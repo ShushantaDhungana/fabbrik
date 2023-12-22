@@ -199,6 +199,7 @@
             
                 </div>
                 <input type="submit" name="submit" value="Sign Up"class="btn btn-primary">
+                <p>Already have an account? <a href="login.php">Log in.</a></p>
             </form>
         </div>
     </div>

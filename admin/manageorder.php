@@ -51,7 +51,7 @@ include '../dbconnect.php';
                 $q = mysqli_query($conn, "SELECT * FROM orders");
                 $rr = mysqli_num_rows($q);
                 if (!$rr) {
-                    echo "<h2 style='color:red'>No any user exists !!!</h2>";
+                    echo "<h2 style='color:red'>No any order exists !!!</h2>";
                 } else {
                 ?>
                     <script>
