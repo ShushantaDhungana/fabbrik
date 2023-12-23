@@ -52,7 +52,7 @@
 
             if($loggedin){
             echo'<li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="logout/logout.php">logout</a></li>
+            <li><a class="dropdown-item" href="logout.php">logout</a></li>
         ';}
           ?>
         </ul>

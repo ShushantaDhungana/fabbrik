@@ -6,7 +6,7 @@
 	if(isset($update)){
 		mysqli_query($conn,"UPDATE products SET name='$name' where pid='". $_GET['pid'] ."'");
 		echo '<script>
-		alert('Product Updated');
+		alert("Product Updated");
 		</script>';
 	}
 

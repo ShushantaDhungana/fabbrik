@@ -1,9 +1,20 @@
 <?php
 include "navbar.php";
 include "dbconnect.php";
-$products = mysqli_query($conn, "SELECT * FROM products");
 
+// Set the number of products to show per page
+$productsPerPage = 10;
+
+// Get the current page number from the URL, default 1 
+$page = isset($_GET['page']) ? $_GET['page'] : 1;
+
+// Calculate the offset based on the current page
+$offset = ($page - 1) * $productsPerPage;
+
+// Fetch products for the current page
+$products = mysqli_query($conn, "SELECT * FROM products LIMIT $offset, $productsPerPage");
 ?>
+
 <!doctype html>
 <html lang="en">
 
@@ -24,7 +35,7 @@ $products = mysqli_query($conn, "SELECT * FROM products");
         while ($prod = mysqli_fetch_array($products)) { ?>
             <div class='card' style='width: 18rem;'>
                 <img src='img/<?php echo $prod['product_image']; ?>' class='card-img-top' alt='...'>
-                <div class='card-body'>
+                <div class='card-body' style ='margin-bottom:25px;' >
                     <h5 class='card-title'>
                         <?php echo $prod['product_name'] ?>
                     </h5>
@@ -39,10 +50,40 @@ $products = mysqli_query($conn, "SELECT * FROM products");
                 </div>
             </div>
         <?php } ?>
-    </div>";
-
-
     </div>
+
+    <!-- Pagination buttons -->
+    <div class="container">
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                <?php
+                // Create previous page button
+                $prevPage = $page - 1;
+                echo "<li class='page-item " . ($page <= 1 ? 'disabled' : '') . "'>
+                        <a class='page-link' href='yourpage.php?page=$prevPage' aria-label='Previous'>
+                            <span aria-hidden='true'>&laquo;</span>
+                        </a>
+                    </li>";
+
+                // Create page numbers
+                for ($i = 1; $i <= ceil(mysqli_num_rows(mysqli_query($conn, "SELECT * FROM products")) / $productsPerPage); $i++) {
+                    echo "<li class='page-item " . ($page == $i ? 'active' : '') . "'>
+                            <a class='page-link' href='ourProducts.php?page=$i'>$i</a>
+                        </li>";
+                }
+
+                // Create next page button
+                $nextPage = $page + 1;
+                echo "<li class='page-item " . ($page >= ceil(mysqli_num_rows(mysqli_query($conn, "SELECT * FROM products")) / $productsPerPage) ? 'disabled' : '') . "'>
+                        <a class='page-link' href='yourpage.php?page=$nextPage' aria-label='Next'>
+                            <span aria-hidden='true'>&raquo;</span>
+                        </a>
+                    </li>";
+                ?>
+            </ul>
+        </nav>
+    </div>
+
     <?php include "footer.php" ?>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
